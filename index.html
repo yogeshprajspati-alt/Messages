@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Letter for You</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400&family=Great+Vibes&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* 🌸 Pink dreamy background */
+    body {
+      font-family: 'Merriweather', serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7, #ffd6f5);
+      background-size: 400% 400%;
+      animation: bgShift 12s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      overflow-x: hidden;
+      color: #3d3d3d;
+    }
+
+    @keyframes bgShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes gentleFloat {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* ✨ Background floating sparkles */
+    .bg-animation-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 192, 203, 0) 70%);
+      border-radius: 50%;
+      animation: floatUp 20s infinite ease-in-out, pulse 4s infinite ease-in-out;
+      filter: blur(2px);
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      50% { opacity: 0.8; }
+      100% { transform: translateY(-20vh) scale(1.3); opacity: 0; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    .orb:nth-child(1){ width:12px;height:12px;left:10%;animation-delay:-2s;}
+    .orb:nth-child(2){ width:10px;height:10px;left:40%;animation-delay:-5s;}
+    .orb:nth-child(3){ width:8px;height:8px;left:70%;animation-delay:-8s;}
+    .orb:nth-child(4){ width:14px;height:14px;left:85%;animation-delay:-3s;}
+    .orb:nth-child(5){ width:9px;height:9px;left:30%;animation-delay:-6s;}
+
+    /* 💌 Letter box with internal animated gradient */
+    .letter-container {
+      position: relative;
+      max-width: 750px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 45px 30px;
+      background: linear-gradient(135deg, rgba(255, 240, 245, 0.9), rgba(255, 220, 230, 0.85));
+      box-shadow: 0 8px 40px rgba(233, 30, 99, 0.25);
+      border: 1px solid rgba(255, 182, 193, 0.4);
+      backdrop-filter: blur(12px);
+      z-index: 1;
+      animation: fadeIn 1.4s ease forwards, gentleFloat 6s ease-in-out infinite 2s;
+      overflow: hidden;
+    }
+
+    /* ✨ Animated background glow inside letter */
+    .letter-container::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,192,203,0.25) 0%, transparent 70%),
+                  radial-gradient(circle at 70% 70%, rgba(255,182,193,0.25) 0%, transparent 70%);
+      animation: innerGlow 10s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes innerGlow {
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(180deg) scale(1.1); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .letter-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .title-container {
+      text-align: center;
+      margin-bottom: 25px;
+      border-bottom: 1px solid rgba(255, 192, 203, 0.5);
+      padding-bottom: 15px;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3em;
+      background: linear-gradient(120deg, #ff5c8d, #ff92b7, #ffc0cb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    .header-emoji {
+      display: block;
+      font-size: 2.3em;
+      margin-top: 6px;
+    }
+
+    p {
+      font-size: 1.1em;
+      line-height: 1.8;
+      margin-bottom: 22px;
+      color: #4a2c2a;
+      opacity: 0;
+      text-align: justify;
+      transition: color 0.3s ease;
+    }
+
+    p:hover {
+      color: #2a1d1d;
+    }
+
+    .signature {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2em;
+      background: linear-gradient(135deg, #ff6699, #e91e63);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: right;
+      margin-top: 40px;
+      opacity: 0;
+    }
+
+    .button-nav-container {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 40px;
+    }
+
+    .nav-btn {
+      font-size: 1em;
+      padding: 12px 20px;
+      color: #e91e63;
+      text-decoration: none;
+      border: 2px solid #ffb6c1;
+      border-radius: 10px;
+      background: rgba(255, 182, 193, 0.3);
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 3px 10px rgba(233,30,99,0.25);
+    }
+
+    .nav-btn:hover {
+      background: linear-gradient(135deg, #ff7fa4, #e91e63);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(233,30,99,0.4);
+    }
+
+    .typing::after {
+      content: '|';
+      animation: blink 1s step-end infinite;
+      color: #e91e63;
+      margin-left: 2px;
+      font-weight: bold;
+    }
+
+    @keyframes blink {
+      0%, 49%, 100% { opacity: 1; }
+      50%, 99% { opacity: 0; }
+    }
+
+    /* 🌷 Mobile adjustments */
+    @media (max-width: 768px) {
+      body { padding: 20px 10px; }
+      .letter-container { padding: 30px 20px; border-radius: 16px; }
+      h1 { font-size: 2.4em; }
+      .header-emoji { font-size: 2em; }
+      p { font-size: 1.02em; line-height: 1.75; }
+      .signature { font-size: 1.8em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-animation-container">
+    <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
+  </div>
+
+  <div class="letter-container">
+    <div class="letter-content">
+      <div class="title-container">
+        <h1>Why are you still here......</h1>
+        <span class="header-emoji">😒</span>
+      </div>
+
+      <p>(Fineeee... padhlooo.., imagine my voice => calm gentle and subtle and deep (chaho to romantic😂 lekin me romantic nhi hu 🐧🤦‍♂️, to dekhlo apne hisab se lekin bs slow slow or satisfying voice....)</p>
+      <p>Mene tumse bola tha na, me tumhare baare me negative sochu to wo galat hi nikalta h😢. Tum ho hi itni bholi bhali masoom or acchi ladki.</p>
+      <p>Wo poorane sab pe mujhe sachme bohot bura laga tha😶‍🌫️, jab tum wapis aai or mene doobara wo sab padha.</p>
+      <p>Mene usme likha tha ki 5 ko response nhi diya to I would take it as a sign of disrespect😢. And you texted back which shows, you still value me❤️ and you always did❤️.</p>
+      <p>Mujhe itna zyada bura lag rha tha. Ki shyd mene tumhare mn me dar bhar diya h😳 Mene bohot saare aise kaam kiye h jinki mujhe kabhi punishment nhi mili, koi de bhi nhi pata reeeeeeeeee... kaash de de koi, ye guilt se mukti mileeee.... </p>
+      <p>Wo 2 saal sachme bohot dark nikle theeeeeeee... meri life crushing scenarios ke saath😂</p>
+      <p>You took me out of it. Or haaa ek cheez h yr 😂 me bohot accha baccha tha bs bhatak gaya tha (ye darkness hai hi aisi cheez)</p>
+      <p>Don't underestimate the allure of darkness Prachiii, even the purest hearts are drawn to it.(Tum to ho hi angel material 😂)</p>
+      <p>There is too much good inside you. Tumhari jagah koi aur hoti to she would have kicked me off her life 😶‍🌫️, you can't even hurt a stranger (me to fir bhi tumhara dost tha)</p>
+      <p>Tumhe kitna bura laga hoga😳, isiliye hata rha hu wo poorana wala with this one, tumhare samne mere andarr ka baccha bahar nikalne lagta h😵‍💫. Jabki me kitna harsh or sakth hu 😂</p>
+      <p>Tum khud konsa bohot mature ho😒😎, tum bhi utni hi mastikhor or badmash ho😒</p>
+      <p>Tumhari tareeef me 200-300 shabd bolne ka mn kar rha h ab🙂🤏🕶😎</p>
+      <p>Lekin tum dant dogi isiliye nhi bol rha 😁😁 (tumhara mn nhi karta kya tareef sunne ka 🐧</p>
+      <p>How much you would teach me, I don't understand oh girl😒 (Self Control bohot important h, seekh rha ab menhat seeeee......)</p>
+      <p>Tum yr padhai karo ab to 😒, mujhe nind aa rhi h isiliye bs ek page badlunga (warna wo 11:30 ka schedule jyada bigad jayega) , exams shuru ho rhe h parso (monday) se isiliye bhiiii....😂.</p>
+      <p>Ab realising ki tum kitna mehnat karti ho daily, every single hour, every single minute and second as well🐧</p>
+      <p>Jaldi se bano yrrrrrr.... doctorrr.... mujhe free ka treatment or dawai chaiye 🔪🔪. psycologist bani to therapy😁, Me tumhare liye free me websites banaungaaa....</p>
+      <p>Tumahri bohot saari tareef karunga in pages me ab😁🐧</p>
+      <p>Or tumpe spend kiya time kharab nhi jata reee🐧, it is worth it(More than diamonds) </p>
+      <p>Truth Dare khel ke saare raaz nikal lunga tumahree🔪 Or dare chun lo bs ek baar😂 dare ke form me tumhare acchi acchi photos maang lunga  😒phas jaogi....</p>
+
+      <p class="signature">- You Are An Angel❤️ Truely❤️</p>
+
+      <div class="button-nav-container">
+        <a href="page2.html" class="nav-btn">Ange mat padho (poorana h) →</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const typeSpeed = 40;
+      const initialDelay = 1200;
+      const paragraphs = document.querySelectorAll('.letter-container p:not(.signature)');
+      const signature = document.querySelector('.signature');
+      const texts = [...paragraphs].map(p => p.textContent);
+      paragraphs.forEach(p => p.textContent = '');
+
+      let index = 0;
+
+      function typeParagraph() {
+        if (index < paragraphs.length) {
+          let p = paragraphs[index];
+          let txt = texts[index];
+          p.style.opacity = '1';
+          p.classList.add('typing');
+          typeWriter(p, txt, 0, () => {
+            p.classList.remove('typing');
+            index++;
+            setTimeout(typeParagraph, 250);
+          });
+        } else {
+          setTimeout(() => { signature.style.opacity = '1'; }, 400);
+        }
+      }
+
+      function typeWriter(el, text, i, done) {
+        if (i < text.length) {
+          el.textContent += text.charAt(i);
+          const delay = text.charAt(i) === '.' ? typeSpeed * 3 : typeSpeed;
+          setTimeout(() => typeWriter(el, text, i + 1, done), delay);
+        } else if (done) done();
+      }
+
+      setTimeout(typeParagraph, initialDelay);
+    });
+  </script>
+</body>
+</html>
