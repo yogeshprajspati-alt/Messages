@@ -20,7 +20,8 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
+            padding: 20px 10px 80px 10px;
+            overflow-y: auto;
             position: relative;
         }
 
@@ -49,8 +50,8 @@
             position: relative;
             width: 90vw;
             max-width: 380px;
-            height: 85vh;
-            max-height: 600px;
+            height: 70vh;
+            max-height: 500px;
             perspective: 1500px;
             transform-style: preserve-3d;
             filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
@@ -176,13 +177,17 @@
         }
 
         .controls {
-            position: absolute;
-            bottom: -60px;
+            position: fixed;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 13;
             display: flex;
             gap: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 10px 15px;
+            border-radius: 30px;
         }
 
         button {
@@ -235,10 +240,13 @@
         }
 
         @media (max-width: 480px) {
+            body {
+                padding: 15px 5px 90px 5px;
+            }
             .notebook {
                 width: 95vw;
-                height: 80vh;
-                max-height: 550px;
+                height: 65vh;
+                max-height: 450px;
             }
             .page {
                 font-size: 18px;
@@ -252,7 +260,8 @@
                 font-size: 16px;
             }
             .controls {
-                bottom: -55px;
+                bottom: 15px;
+                padding: 8px 12px;
             }
             button {
                 padding: 10px 20px;
@@ -261,12 +270,28 @@
             }
         }
 
-        @media (max-height: 600px) {
+        @media (max-height: 700px) {
+            body {
+                padding: 10px 5px 80px 5px;
+            }
             .notebook {
-                height: 75vh;
+                height: 60vh;
+                max-height: 400px;
             }
             .controls {
-                bottom: -50px;
+                bottom: 10px;
+            }
+        }
+
+        @media (max-height: 600px) {
+            .notebook {
+                height: 55vh;
+                max-height: 350px;
+            }
+            .page {
+                font-size: 16px;
+                padding: 15px;
+                padding-left: 35px;
             }
         }
     </style>
@@ -345,7 +370,7 @@
                     <p>Oye or asia nhi h ki mere pass bohot khaali waqt h, aisa bhi nhi h ki me isme barbaad kar rha hu. "🧸This is a thing that I really like to do🧸" aur isiliye me time nikal ke ye banata hu aur online publish kar deta hu🐣🐤🐥</p>
                     <p>Tum padhti ho to accha bhi lagta fir 😂🧸 </p>
                     <p>Or agar meri is chhoti si cheez se meri Little Angle Miss ka din accha ho sakta h to, why not to built it!!</p>
-                    <p>Batana zaroor ye wali design kaisi lagi 🧸 I'll wait </p>
+                    <p>Batana zaroor ye wali design kaisi lagi 🧸 I'll wait................... </p>
                     <p style="text-align: center; margin-top: 30px; font-size: 24px;">✨ Chalo jao reeee ✨</p>
                 </div>
             </div>
